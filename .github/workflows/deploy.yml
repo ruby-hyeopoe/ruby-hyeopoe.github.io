@@ -1,0 +1,50 @@
+name: Deploy to GitHub pages
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  BRIDGETOWN_ENV: production
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install libvips
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run:
+          # we only need the library
+          sudo apt-get install --fix-missing -qq -o Acquire::Retries=3 libvips 
+            
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+          cache: "yarn"
+      - run: yarn install
+
+      - name: Refresh Cache
+        run: bin/bridgetown clean
+
+      - name: Build Frontend
+        run: bin/bridgetown frontend:build
+
+      - name: Build Static Site
+        run: bin/bridgetown build -V
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./output
+
