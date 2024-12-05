@@ -31,7 +31,8 @@ layout: default
 
         <a
           class="block w-full rounded px-12 py-3 text-sm font-medium text-red-600 shadow hover:text-red-700 focus:outline-none focus:ring active:text-red-500 sm:w-auto"
-          href="#"
+          href="/정관.pdf"
+          download
         >
           커뮤니티와 함께하기
         </a>
