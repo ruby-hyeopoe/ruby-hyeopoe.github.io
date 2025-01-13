@@ -3,7 +3,7 @@ Bridgetown.configure do |config|
   # `bridgetown.config.yml`. For example:
   #
   # permalink "simple"
-  # timezone "America/Los_Angeles"
+  timezone "Asia/Seoul"
   #
   # You can also modify options on the configuration object directly, like so:
   #
@@ -45,7 +45,7 @@ Bridgetown.configure do |config|
   # Uncomment to use file-based dynamic template routing via Roda (make sure you
   # uncomment the gem dependency in your `Gemfile` as well):
   #
-  # init :"bridgetown-routes"
+  init :"bridgetown-routes"
   #
 
   # We also recommend that if you're using Roda routes you include this plugin

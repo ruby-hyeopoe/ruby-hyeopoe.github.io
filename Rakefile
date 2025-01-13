@@ -39,13 +39,11 @@ namespace :frontend do
   end
 end
 
-#
-# Add your own Rake tasks here! You can use `environment` as a prerequisite
-# in order to write automations or other commands requiring a loaded site.
-#
-# task :my_task => :environment do
-#   puts site.root_dir
-#   automation do
-#     say_status :rake, "I'm a Rake tast =) #{site.config.url}"
-#   end
-# end
+namespace :r do
+  desc "Prints out the Roda routes file"
+  task :routes do
+    require "bridgetown-core/rack/boot"
+
+    Bridgetown::Rack::Routes.print_routes
+  end
+end
